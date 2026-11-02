@@ -5,5 +5,5 @@
  *     trang «Dữ liệu quản lí» đọc thống kê bằng mật khẩu đặt trong Apps Script.
  */
 window.ECO_CONFIG = {
-  apiUrl: ''
+  apiUrl: 'https://script.google.com/macros/s/AKfycbylooKzO9DkmF1uHFpe_Hau67oJqucc8iwFpf1ui2II0mtl4m6Cel_pFEZVYrUmvQnFYw/exec'
 };
