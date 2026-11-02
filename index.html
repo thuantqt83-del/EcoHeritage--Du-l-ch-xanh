@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="css/lang-nghe.css?v=20261031e">
   <link rel="stylesheet" href="css/home.css?v=20261031e">
   <link rel="stylesheet" href="css/trang.css?v=20261102b">
+  <link rel="stylesheet" href="css/cho-xanh.css?v=20261102b">
 </head>
 <body>
   <a class="skip" href="#di-san">Bỏ qua, đến mục Di sản</a>
@@ -44,6 +45,7 @@
         <a href="#du-lich-xanh">Du lịch xanh</a>
         <a href="#ket-noi">Kết nối cộng đồng</a>
         <a href="#trai-nghiem">Trải nghiệm</a>
+        <a href="#cho-xanh">Chợ xanh</a>
         <a href="#tro-ly">Trợ lí Heri</a>
         <a href="#truong-hoc">Trường học</a>
         <a href="#ban-do">Bản đồ</a>
@@ -247,6 +249,22 @@
     </section>
 
     <!-- ===== Trợ lí Heri ===== -->
+    <!-- Chợ xanh: nông sản, đặc sản, thủ công làng nghề, trải nghiệm. Khách đặt trực tiếp, trả tiền cho người bán -->
+    <section data-page="cho-xanh" class="bh-sec" id="cho-xanh" aria-labelledby="cx-title">
+      <div class="container">
+        <h2 class="bh-title" id="cx-title">Chợ xanh</h2>
+        <p class="bh-lead">Nông sản, đặc sản và hàng làng nghề của Hà Nam, Nam Định, Ninh Bình. Chọn món, đặt trên app, người bán liên hệ xác nhận. Bạn trả tiền trực tiếp cho người bán.</p>
+        <p class="cx-note"><b>Bản demo:</b> tên cơ sở, giá và số lượng là dữ liệu mẫu để minh hoạ. Khi vận hành, người bán đã được duyệt sẽ cập nhật sản phẩm và giá thật.</p>
+        <div class="cx-tools">
+          <div class="cx-chips" id="cx-nhom" role="group" aria-label="Lọc theo nhóm"></div>
+          <div class="cx-chips" id="cx-vung" role="group" aria-label="Lọc theo tỉnh"></div>
+          <div class="cx-search"><input type="search" id="cx-q" placeholder="Tìm sản phẩm, làng nghề…" aria-label="Tìm sản phẩm" maxlength="60"><span class="cx-count" id="cx-count" aria-live="polite"></span></div>
+        </div>
+        <div class="cx-grid" id="cx-list"></div>
+        <div class="cx-bar" id="cx-bar" hidden><span id="cx-bar-text"></span><button type="button" class="btn btn-sm" id="cx-open" style="background:#fff;color:var(--navy)">Xem giỏ và đặt mua</button></div>
+      </div>
+    </section>
+
     <section data-page="tro-ly" id="tro-ly">
       <div class="container">
         <span class="eyebrow reveal">Trợ lí ảo</span>
@@ -402,6 +420,34 @@
   </dialog>
 
   <!-- hộp thoại báo giá -->
+  <dialog id="cx-dialog" aria-labelledby="cx-dtitle">
+    <div class="dlg" id="cx-main">
+      <h3 id="cx-dtitle">Giỏ hàng và đặt mua</h3>
+      <p class="note" id="cx-empty" hidden>Giỏ hàng đang trống. Bạn chọn món ở Chợ xanh nhé.</p>
+      <div id="cx-items"></div>
+      <div id="cx-form">
+        <p class="cx-total" id="cx-total"></p>
+        <label class="field">Họ tên *<input type="text" id="cx-name" maxlength="80" autocomplete="name"></label>
+        <label class="field">Số điện thoại hoặc Zalo *<input type="tel" id="cx-contact" maxlength="30" autocomplete="tel"></label>
+        <label class="field" id="cx-addr-wrap">Địa chỉ nhận hàng *<textarea id="cx-addr" rows="2" maxlength="200" autocomplete="street-address"></textarea></label>
+        <label class="field" id="cx-date-wrap">Ngày dự kiến đi trải nghiệm<input type="date" id="cx-date"></label>
+        <label class="field">Ghi chú cho người bán<textarea id="cx-note" rows="2" maxlength="300"></textarea></label>
+        <fieldset class="cx-pay"><legend>Cách thanh toán</legend>
+          <label><input type="radio" name="cx-pay" value="khi-nhan" checked><span>Trả tiền mặt khi nhận hàng hoặc khi đến trải nghiệm</span></label>
+          <label><input type="radio" name="cx-pay" value="chuyen-khoan"><span>Chuyển khoản trực tiếp cho người bán (người bán nhắn số tài khoản qua số bạn để lại)</span></label>
+        </fieldset>
+        <p class="cx-privacy">EcoHeritage không thu tiền thay người bán. Họ tên, số liên hệ và địa chỉ chỉ dùng để người bán xác nhận và giao hàng.</p>
+        <p class="note" id="cx-err" role="alert" style="color:#b3401c;margin:0" hidden></p>
+      </div>
+      <div class="actions"><button class="btn btn-line btn-sm" type="button" id="cx-close">Đóng</button><button class="btn btn-primary btn-sm" type="button" id="cx-send">Gửi đơn đặt mua</button></div>
+    </div>
+    <div class="dlg" id="cx-done" hidden>
+      <h3>Đã gửi đơn</h3>
+      <div class="sum" id="cx-done-text"></div>
+      <div class="actions"><button class="btn btn-line btn-sm" type="button" id="cx-keep">Mua tiếp</button><button class="btn btn-primary btn-sm" type="button" id="cx-close2">Xong</button></div>
+    </div>
+  </dialog>
+
   <dialog id="quote-dialog" aria-labelledby="qd-title">
     <div class="dlg" id="qd-form-wrap">
       <h3 id="qd-title">Đặt tour</h3>
@@ -467,12 +513,14 @@
   <script src="js/app.js?v=20261031f"></script>
   <script src="js/tour-video.js?v=20261031e"></script>
   <script src="js/tour-ui.js?v=20261102c"></script>
+  <script src="js/cho-xanh-data.js?v=20261102a"></script>
+  <script src="js/cho-xanh.js?v=20261102a"></script>
   <script src="js/assistant.js?v=20261031e"></script>
   <script src="js/lang-nghe.js?v=20261031e"></script>
   <script src="js/eco-home.js?v=20261031e"></script>
   <script src="js/ban-do-so.js?v=20261031e"></script>
   <script src="js/dai-anh-trang.js?v=20261102a"></script>
-  <script src="js/eco-pages.js?v=20261031g"></script>
+  <script src="js/eco-pages.js?v=20261102a"></script>
   <script src="js/loi-binh.js?v=20261031e"></script>
   <script src="js/nhac-nen.js?v=20261031f"></script>
   <script src="js/ma-qr.js?v=20261031g"></script>

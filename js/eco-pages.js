@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  const IDS = ['trang-chu', 'di-san', 'du-lich-xanh', 'ket-noi', 'trai-nghiem', 'tro-ly', 'truong-hoc', 'ban-do', 'du-lieu'];   // hồ sơ dự án không đưa lên trang: lưu ở «EcoHeritage - Ho so du thi» (31/10/2026)
+  const IDS = ['trang-chu', 'di-san', 'du-lich-xanh', 'ket-noi', 'trai-nghiem', 'cho-xanh', 'tro-ly', 'truong-hoc', 'ban-do', 'du-lieu'];   // hồ sơ dự án không đưa lên trang: lưu ở «EcoHeritage - Ho so du thi» (31/10/2026)
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
   let cur = '';
