@@ -1,0 +1,15 @@
+{
+  "name": "EcoHeritage – Di sản xanh, hành trình bền vững",
+  "short_name": "EcoHeritage",
+  "description": "Di sản xanh Hà Nam – Nam Định – Ninh Bình: 360°, bản đồ, tour xanh và trợ lí Heri.",
+  "lang": "vi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4fbef",
+  "theme_color": "#044f5d",
+  "icons": [
+    { "src": "assets/thuong-hieu/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/thuong-hieu/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

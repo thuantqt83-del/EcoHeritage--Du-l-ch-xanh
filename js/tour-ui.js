@@ -39,6 +39,26 @@
         '<span class="tc-play">▶ Xem video hành trình</span></button>').join('');
   }
 
+  /* ---------- bảng tác động xanh của phương án đang chọn (số ước tính, công thức ở tours.js) ---------- */
+  const TREE_KG = 21; // một cây xanh hấp thụ khoảng 21 kg CO₂ mỗi năm (số ước tính thường dùng)
+  const num = (n, d) => n.toLocaleString('vi-VN', { maximumFractionDigits: d || 0 });
+  function impact(q) {
+    const co2All = q.co2Saved * q.people, share = q.total ? Math.round(100 * q.localMoney / q.total) : 0;
+    const trees = co2All / TREE_KG;
+    return '<div class="tv-impact" aria-label="Tác động xanh của phương án đã chọn">' +
+      '<h4>Tác động xanh <small>(' + esc(q.plan.label) + ', ' + q.people + ' người)</small></h4>' +
+      '<div class="ti-score"><b>' + q.score + '</b><span>/100 điểm xanh</span><i style="--w:' + q.score + '%"></i></div>' +
+      '<ul>' +
+        '<li><b>' + num(co2All, 1) + ' kg</b><span>CO₂ tiết kiệm' + (q.co2SavedPct ? ' (−' + q.co2SavedPct + '% so với đi ô tô riêng)' : '') + '</span></li>' +
+        (trees >= 1 ? '<li><b>≈ ' + num(trees, 1) + ' cây</b><span>xanh hấp thụ CO₂ trong một năm</span></li>'
+          : '<li><b>≈ ' + num(Math.max(1, trees * 365)) + ' ngày</b><span>hấp thụ CO₂ của một cây xanh</span></li>') +
+        '<li><b>' + vnd(q.localMoney) + '</b><span>về hộ và cơ sở địa phương (≈ ' + share + '% giá tour)</span></li>' +
+      '</ul>' +
+      '<details><summary>Cách tính</summary><p>CO₂ = số km từng chặng × hệ số phát thải của phương tiện, so với đi ô tô riêng cùng quãng đường (0,085 kg/người/km). ' +
+      'Phần về địa phương = ' + Math.round(Eco.ASSUMPTIONS.LOCAL_SHARE * 100) + '% chi phí vé, ăn, nghỉ. 1 cây ≈ ' + TREE_KG + ' kg CO₂/năm. Đây là số ước tính của bản demo, chưa phải kiểm toán carbon.</p></details>' +
+      '</div>';
+  }
+
   function select(tourId, autoplay) {
     if (Eco.tourById[tourId]) state.tour = tourId;
     renderTours();
@@ -54,6 +74,7 @@
         '</b><span>' + vnd(x.perPerson) + '/người</span></button>').join('') + '</div>' +
       '<table>' + q.lines.map((l) => '<tr><td>' + esc(l.label) + '</td><td>' + vnd(l.amount) + '</td></tr>').join('') +
       '<tr class="sum"><td>Tổng ' + state.people + ' người</td><td>' + vnd(q.total) + '</td></tr></table>' +
+      impact(q) +
       '<p class="note">Giá minh hoạ của bản demo; khi vận hành lấy theo bảng giá của đối tác.</p>';
     if (window.TourVideo) window.TourVideo.load(t, Eco.quote(t.id, state.plan, state.people, state.from), autoplay);
   }

@@ -7,6 +7,19 @@
   <meta name="description" content="Nền tảng du lịch trải nghiệm di sản xanh: xem 360° di sản và làng nghề ở Hà Nam, Nam Định, Ninh Bình, dựng tour xanh có báo giá cùng trợ lí ảo Heri.">
   <meta name="theme-color" content="#044f5d">
   <link rel="icon" href="assets/thuong-hieu/logo-96.png" type="image/png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/thuong-hieu/icon-192.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="EcoHeritage">
+  <meta property="og:title" content="EcoHeritage – Di sản xanh, hành trình bền vững">
+  <meta property="og:description" content="Khám phá di sản Hà Nam – Nam Định – Ninh Bình: 360°, bản đồ di sản số, tour xanh có báo giá và trợ lí ảo Heri.">
+  <meta property="og:url" content="https://thuantqt83-del.github.io/EcoHeritage--Du-l-ch-xanh/">
+  <meta property="og:image" content="https://thuantqt83-del.github.io/EcoHeritage--Du-l-ch-xanh/assets/thuong-hieu/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://thuantqt83-del.github.io/EcoHeritage--Du-l-ch-xanh/assets/thuong-hieu/og-image.png">
   <script>document.documentElement.classList.add('js');</script>
   <!-- phông chữ và Leaflet 1.9.4 (BSD-2) chép vào máy: chạy không cần mạng -->
   <link rel="stylesheet" href="thu-vien/phong-chu/phong-chu.css">
@@ -14,7 +27,7 @@
   <link rel="stylesheet" href="css/style.css?v=20261031e">
   <link rel="stylesheet" href="css/lang-nghe.css?v=20261031e">
   <link rel="stylesheet" href="css/home.css?v=20261031e">
-  <link rel="stylesheet" href="css/trang.css?v=20261102a">
+  <link rel="stylesheet" href="css/trang.css?v=20261102b">
 </head>
 <body>
   <a class="skip" href="#di-san">Bỏ qua, đến mục Di sản</a>
@@ -453,7 +466,7 @@
   <script src="js/ban-do-nen.js?v=20261031f"></script>
   <script src="js/app.js?v=20261031f"></script>
   <script src="js/tour-video.js?v=20261031e"></script>
-  <script src="js/tour-ui.js?v=20261031e"></script>
+  <script src="js/tour-ui.js?v=20261102c"></script>
   <script src="js/assistant.js?v=20261031e"></script>
   <script src="js/lang-nghe.js?v=20261031e"></script>
   <script src="js/eco-home.js?v=20261031e"></script>
@@ -463,5 +476,10 @@
   <script src="js/loi-binh.js?v=20261031e"></script>
   <script src="js/nhac-nen.js?v=20261031f"></script>
   <script src="js/ma-qr.js?v=20261031g"></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+  </script>
 </body>
 </html>
